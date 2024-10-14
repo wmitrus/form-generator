@@ -19,6 +19,6 @@
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-
+  "htmlWhitespaceSensitivity": "strict",
   "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"]
 }
