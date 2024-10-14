@@ -141,15 +141,21 @@ module.exports = function (plop) {
           message: 'Component name?',
         },
         {
+          type: 'input',
+          name: 'type',
+          message: 'Enter a component folder:',
+        },
+        {
           type: 'list',
           name: 'componentType',
           message: 'Select a component type',
           choices: ['basic', 'polymorphic'],
         },
         {
-          type: 'input',
-          name: 'type',
-          message: 'Enter a component folder:',
+          type: 'confirm',
+          name: 'withChildren',
+          message: 'With children?',
+          default: true,
         },
       ];
 
@@ -161,15 +167,28 @@ module.exports = function (plop) {
           default: false,
         });
       }
+
       const answers = await inquirer.prompt(prompts);
+
+      const componentType = answers.componentType;
+      const htmlElementAnswer =
+        componentType === 'polymorphic' &&
+        (await inquirer.prompt({
+          type: 'input',
+          name: 'htmlElement',
+          message: 'Enter an html element to adapt:',
+        }));
 
       return {
         isTypeScript: isTS || answers.isTypeScript,
         name: answers.componentName,
         type: answers.type === 'none' ? null : answers.type,
         componentType: answers.componentType,
+        htmlElement: htmlElementAnswer.htmlElement,
+        withChildren: answers.withChildren,
       };
     },
+
     actions: function (data) {
       const extension = data.isTypeScript ? 'tsx' : 'jsx';
       const path = data.type

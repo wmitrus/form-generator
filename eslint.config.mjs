@@ -1,6 +1,7 @@
 import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import pluginJs from '@eslint/js';
+// import html from 'eslint-plugin-html';
 import prettierConfigRecommended from 'eslint-plugin-prettier/recommended';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
@@ -22,13 +23,24 @@ const patchedConfig = fixupConfigRules([...compat.extends('next/core-web-vitals'
 const config = [
   ...patchedConfig,
   ...tseslint.configs.recommended,
-  // pluginReact.configs.flat.recommended,
   prettierConfigRecommended,
+  // {
+  //   files: ['**/*.hbs'],
+  //   plugins: { html },
+  //   settings: {
+  //     'html/html-extensions': ['.hbs', '.we'], // consider .html and .we files as HTML
+  //   },
+  // },
   // Add more flat configs here
   {
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
-  { ignores: ['**/node_modules/*', '**/out/*', '**/.next/*'] },
+  { ignores: ['**/node_modules/*', '**/out/*', '**/.next/*', 'plop-templates/**/*.*'] },
+  {
+    rules: {
+      'react/no-unescaped-entities': 'error',
+    },
+  },
 ];
 
 export default config;
