@@ -23,6 +23,12 @@ function isUsingTypeScript() {
   return fs.existsSync(path.join(process.cwd(), 'tsconfig.json'));
 }
 
+const createTestFile = {
+  forPage: true,
+  forComponent: true,
+  forApi: true,
+};
+
 module.exports = function (plop) {
   const isTS = isUsingTypeScript();
 
@@ -111,6 +117,7 @@ module.exports = function (plop) {
 
     actions: function (data) {
       let path = `src/app/api/${data.name}`;
+
       // Append dynamic routes to the path
       if (data.dynamicRoutes && data.dynamicRoutes.length > 0) {
         path += '/' + data.dynamicRoutes.map((route) => `[${route}]`).join('/');
@@ -195,6 +202,10 @@ module.exports = function (plop) {
         ? `src/components/{{dashCase type}}/{{dashCase name}}/{{pascalCase name}}.${extension}`
         : `src/components/{{dashCase name}}/{{pascalCase name}}.${extension}`;
 
+      const testPath = data.type
+        ? `__tests__/components/{{dashCase type}}/{{dashCase name}}/{{pascalCase name}}.test.${extension}`
+        : `__tests__/components/{{dashCase name}}/{{pascalCase name}}.test.${extension}`;
+
       const actions = [
         {
           type: 'add',
@@ -202,6 +213,17 @@ module.exports = function (plop) {
           templateFile: 'plop-templates/components/component.hbs', // Adjust this path as needed
         },
       ];
+
+      if (createTestFile.forComponent === true) {
+        actions.push({
+          type: 'add',
+          path: testPath,
+          templateFile: 'plop-templates/tests/component.hbs', // Adjust this path as needed
+        });
+      }
+
+      console.log(actions);
+
       return actions;
     },
   });
