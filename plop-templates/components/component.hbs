@@ -11,7 +11,7 @@ type {{pascalCase name}}Props = {} & ComponentPropsWithoutRef<'{{htmlElement}}'>
 const {{pascalCase name}} = ({ {{#if withChildren}}children, {{/if}}className, ...rest }{{#if isTypeScript}}: {{#if withChildren}}PropsWithChildren<{{/if}}{{pascalCase name}}Props{{#if withChildren}}>{{/if}}{{/if}}){{#if isTypeScript}}: ReactElement{{/if}} => {
 
   return (
-    <{{htmlElement}} className={cn(['border', className])} {...rest}>
+    <{{htmlElement}} role="{{dashCase name}}" className={cn(['', className])} {...rest}>
       {{#if withChildren}}{children}{{else}}Content{{/if}}
     </{{htmlElement}}>
   );
@@ -29,7 +29,7 @@ type {{pascalCase name}}Props = {};
 const {{pascalCase name}} = ({}{{#if isTypeScript}}: {{pascalCase name}}Props{{/if}}){{#if isTypeScript}}: ReactElement{{/if}} => {
 
   return (
-    <div>
+    <div role="{{dashCase name}}">
       {{pascalCase name}}
     </div>
   );
