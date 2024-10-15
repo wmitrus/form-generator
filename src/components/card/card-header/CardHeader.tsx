@@ -11,7 +11,12 @@ const CardHeader = ({
   ...rest
 }: PropsWithChildren<CardHeaderProps>): ReactElement => {
   return (
-    <div className={cn(['border-b-2 border-black/20 px-6 py-3', className])} {...rest}>
+    <div
+      role="card-header"
+      id="cardHeader"
+      className={cn(['border-b-2 border-black/20 px-6 py-3', className])}
+      {...rest}
+    >
       {children}
     </div>
   );

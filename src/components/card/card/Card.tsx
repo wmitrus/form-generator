@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '@/lib/utils';
 
-type CardProps = { variant: string } & ComponentPropsWithoutRef<'div'>;
+type CardProps = { variant?: string } & ComponentPropsWithoutRef<'div'>;
 
 const Card = ({
   children,
@@ -11,34 +11,37 @@ const Card = ({
   className,
   ...rest
 }: PropsWithChildren<CardProps>): ReactElement => {
-  const bgColor = (function () {
+  const bgClass = (function () {
     switch (variant) {
       case 'primary':
-        return '#3B71CA';
+        return 'bg-primary';
       case 'secondary':
-        return '#9FA6B2';
+        return 'bg-secondary';
       case 'success':
-        return '#14A44D';
+        return 'bg-success';
       case 'danger':
-        return '#DC4C64';
+        return 'bg-danger';
       case 'warning':
-        return '#E4A11B';
+        return 'bg-warning';
       case 'info':
-        return '#54B4D3';
+        return 'bg-info';
       case 'light':
-        return '#F9FAFB';
+        return 'bg-light';
       case 'dark':
-        return '#1F2937';
+        return 'bg-dark';
       default:
-        break;
+        return 'bg-light';
     }
   })();
+
+  const color = variant === 'light' ? 'text-gray-700' : 'text-white';
 
   return (
     <div className={cn(['flex justify-center', className])} {...rest}>
       <div
-        style={{ backgroundColor: bgColor }}
-        className="shadow-secondary-1 block max-w-[18rem] rounded-lg bg-slate-500 text-white"
+        role="card"
+        id="card"
+        className={`${bgClass} custo shadow-secondary-1 block max-w-[18rem] rounded-lg ${color}`}
       >
         {children}
       </div>
