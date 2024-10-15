@@ -2,7 +2,7 @@ import CardBody from '@/components/card/card-body/CardBody';
 import CardHeader from '@/components/card/card-header/CardHeader';
 import Card from '@/components/card/card/Card';
 
-export default function Page({ params }: { params: { variant: string } }) {
+export default function CardPage({ params }: { params: { variant: string } }) {
   const { variant } = params;
 
   return (
