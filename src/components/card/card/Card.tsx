@@ -34,7 +34,7 @@ const Card = ({
     }
   })();
 
-  const color = variant === 'light' ? 'text-gray-700' : 'text-white';
+  const color = variant === 'light' || variant === '' ? 'text-gray-700' : 'text-white';
 
   return (
     <div className={cn(['flex justify-center', className])} {...rest}>
