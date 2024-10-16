@@ -108,7 +108,7 @@ module.exports = function (plop) {
         isTypeScript: isTS || basicAnswers.isTypeScript,
         name: basicAnswers.name,
         dynamicRoutes,
-        hasDinamycRoutes: Boolean(dynamicRoutes.length),
+        hasDynamicRoutes: Boolean(dynamicRoutes.length),
         methods: methods.methods.map((method) => {
           return { type: method, dynamicRoutes };
         }),
@@ -117,15 +117,20 @@ module.exports = function (plop) {
 
     actions: function (data) {
       let path = `src/app/api/${data.name}`;
+      let testPath = `__tests__/app/api/${data.name}`;
 
       // Append dynamic routes to the path
       if (data.dynamicRoutes && data.dynamicRoutes.length > 0) {
         path += '/' + data.dynamicRoutes.map((route) => `[${route}]`).join('/');
+        testPath += '/' + data.dynamicRoutes.map((route) => `[${route}]`).join('/');
       }
+
       const extension = data.isTypeScript ? 'ts' : 'js';
 
       // Add the file name to the path
       path += `/route.${extension}`;
+      testPath += `/route.test.${extension}`;
+
       const actions = [
         {
           type: 'add',
@@ -133,6 +138,15 @@ module.exports = function (plop) {
           templateFile: 'plop-templates/api/api-route.hbs', // Adjust this path as needed
         },
       ];
+
+      if (createTestFile.forApi === true) {
+        actions.push({
+          type: 'add',
+          path: testPath,
+          templateFile: 'plop-templates/tests/api-route.hbs', // Adjust this path as needed
+        });
+      }
+
       return actions;
     },
   });
@@ -222,8 +236,6 @@ module.exports = function (plop) {
         });
       }
 
-      console.log(actions);
-
       return actions;
     },
   });
@@ -280,24 +292,37 @@ module.exports = function (plop) {
         }
       }
 
+      const { createLayout } = await inquirer.prompt({
+        type: 'confirm',
+        name: 'createLayout',
+        message: 'Would you like to add layout file for this page?',
+        default: false,
+      });
+
       return {
         isTypeScript: isTS || basicAnswers.isTypeScript,
         name: basicAnswers.name,
         dynamicRoutes,
-        hasDinamycRoutes: Boolean(dynamicRoutes.length),
+        hasDynamicRoutes: Boolean(dynamicRoutes.length),
       };
     },
 
     actions: function (data) {
       let path = `src/app/${data.name}`;
+      let testPath = `__tests__/app/${data.name}`;
+
       // Append dynamic routes to the path
       if (data.dynamicRoutes && data.dynamicRoutes.length > 0) {
         path += '/' + data.dynamicRoutes.map((route) => `[${route}]`).join('/');
+        testPath += '/' + data.dynamicRoutes.map((route) => `[${route}]`).join('/');
       }
       const extension = data.isTypeScript ? 'tsx' : 'jsx';
 
       // Add the file name to the path
       path += `/page.${extension}`;
+      testPath += `/page.test.${extension}`;
+      const layoutPath = path + `/layout.${extension}`;
+
       const actions = [
         {
           type: 'add',
@@ -305,6 +330,23 @@ module.exports = function (plop) {
           templateFile: 'plop-templates/page/page-route.hbs', // Adjust this path as needed
         },
       ];
+
+      if (createTestFile.forPage === true) {
+        actions.push({
+          type: 'add',
+          path: testPath,
+          templateFile: 'plop-templates/tests/page.test.hbs', // Adjust this path as needed
+        });
+      }
+
+      if (createLayout === true) {
+        actions.push({
+          type: 'add',
+          path: layoutPath,
+          templateFile: 'plop-templates/page/page-layout.hbs', // Adjust this path as needed
+        });
+      }
+
       return actions;
     },
   });

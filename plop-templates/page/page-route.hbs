@@ -1,11 +1,21 @@
-{{#if hasDinamycRoutes}}
+{{#if hasDynamicRoutes}}
 export default function Page({ params }{{#if isTypeScript}}: { params: { {{#each dynamicRoutes}}{{this}}: string{{#unless @last}}, {{/unless}}{{/each}} } }{{/if}}) {
   const { {{#each dynamicRoutes}}{{this}}{{#unless @last}}, {{/unless}}{{/each}} } = params;
 
-  return <h1>Hello World</h1>
+  return (
+    <div>
+      <h1>Hello World</h1>
+      Sample text
+    </div>
+    );
 }
 {{else}}
 export default function Page() {
-  return <h1>Hello World</h1>
+  return (
+    <div>
+      <h1>Hello World</h1>
+      Sample text
+    </div>
+    );
 }
 {{/if}}
