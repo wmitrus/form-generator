@@ -6,12 +6,14 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "forceConsistentCasingInFileNames": true,
+    "module": "preserve",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["node"],
     "plugins": [
       {
         "name": "next"
@@ -21,6 +23,9 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "commitlint.config.ts"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "data/**/*.json", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "commitlint.config.ts", "plopfile.ts.bak", "plopfile.ts.bak", "plop-templates/**/*.hbs"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true
+  },
 }

@@ -41,6 +41,7 @@ const Configuration: UserConfig = {
         'component',
         'ui',
         'api',
+        'page',
         'store',
         'other', // Other changes
       ],
