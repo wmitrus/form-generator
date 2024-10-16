@@ -304,6 +304,7 @@ module.exports = function (plop) {
         name: basicAnswers.name,
         dynamicRoutes,
         hasDynamicRoutes: Boolean(dynamicRoutes.length),
+        createLayout,
       };
     },
 
@@ -319,9 +320,9 @@ module.exports = function (plop) {
       const extension = data.isTypeScript ? 'tsx' : 'jsx';
 
       // Add the file name to the path
+      const layoutPath = path + `/layout.${extension}`;
       path += `/page.${extension}`;
       testPath += `/page.test.${extension}`;
-      const layoutPath = path + `/layout.${extension}`;
 
       const actions = [
         {
@@ -339,7 +340,7 @@ module.exports = function (plop) {
         });
       }
 
-      if (createLayout === true) {
+      if (data.createLayout === true) {
         actions.push({
           type: 'add',
           path: layoutPath,
