@@ -41,7 +41,7 @@ const Card = ({
       <div
         role="card"
         id="card"
-        className={`${bgClass} custo shadow-secondary-1 block max-w-[18rem] rounded-lg ${color}`}
+        className={`${bgClass} shadow-secondary-1 block max-w-[18rem] rounded-lg ${color}`}
       >
         {children}
       </div>
