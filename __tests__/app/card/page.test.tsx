@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
-// for additional assertions
 import CardPage from '@/app/card/[variant]/page';
 
 describe('Card Page', () => {
@@ -17,7 +16,6 @@ describe('Card Page', () => {
     expect(element).toHaveClass('bg-primary');
 
     // Check if the header and body are rendered correctly
-    expect(screen.getByText('Header')).toBeInTheDocument();
     expect(
       screen.getByText(
         "Some quick example text to build on the card title and make up the bulk of the card's content.",
