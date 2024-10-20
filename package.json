@@ -18,6 +18,8 @@
   "dependencies": {
     "lint-staged": "^15.2.10",
     "next": "14.2.15",
+    "pino": "^9.5.0",
+    "pino-http": "^10.3.0",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -67,6 +69,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-json-schema": "^6.1.0",
     "nextjs14-plop-templates": "^1.0.3",
+    "node-fetch": "^3.3.2",
     "node-mocks-http": "^1.16.1",
     "plop": "^4.0.1",
     "postcss": "^8",
