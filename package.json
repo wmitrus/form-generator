@@ -18,6 +18,8 @@
   "dependencies": {
     "lint-staged": "^15.2.10",
     "next": "14.2.15",
+    "pino": "^9.5.0",
+    "pino-http": "^10.3.0",
     "react": "^18",
     "react-dom": "^18"
   },
