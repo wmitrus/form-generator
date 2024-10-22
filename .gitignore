@@ -45,3 +45,8 @@ robots.txt
 sitemap.xml
 sitemap-*.xml
 *storybook.log
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
