@@ -17,6 +17,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^15.0.0",
     "lint-staged": "^15.2.10",
     "next": "14.2.15",
     "pino": "^9.5.0",
