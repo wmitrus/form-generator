@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+import { expect, fn, within } from '@storybook/test';
 
 import { Button } from './Button';
 
@@ -56,5 +56,18 @@ export const ButtonTest: Story = {
   args: {
     primary: false,
     label: 'Button',
+  },
+};
+export const ButtonExists: Story = {
+  args: {
+    label: 'Button',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.queryByRole('button');
+    // button && (await userEvent.click(button));
+
+    await expect(button).toBeInTheDocument();
   },
 };
