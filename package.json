@@ -14,7 +14,8 @@
     "plop": "plop",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "test-storybook",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "check-circular-deps": "madge --circular ."
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.0.0",
